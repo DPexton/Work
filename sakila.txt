@@ -1,0 +1,67 @@
+SELECT * FROM actor;
+
+SELECT * FROM actor WHERE first_name = "JOHN";
+
+SELECT * FROM actor WHERE last_name = "NEESON";
+
+SELECT * FROM actor WHERE actor_id %10 = 0;
+
+SELECT description FROM film WHERE film_id = 100;
+
+SELECT * FROM film WHERE rating = "R";
+
+SELECT * FROM film WHERE rating != "R";
+
+SELECT * FROM film ORDER BY length ASC LIMIT 10;
+
+SELECT * FROM film ORDER by length DESC;
+
+SELECT * FROM film WHERE special_features LIKE "%Deleted Scenes%";
+
+SELECT last_name FROM actor GROUP BY last_name HAVING COUNT(last_name) = 1 ORDER BY last_name DESC; 
+
+SELECT COUNT(last_name), last_name FROM actor GROUP BY last_name HAVING COUNT(last_name) > 1 ORDER BY COUNT(last_name) DESC;
+
+SELECT a.first_name, a.last_name, COUNT(b.actor_id)
+FROM actor a
+JOIN film_actor b ON a.actor_id=b.actor_id
+GROUP BY a.actor_id
+ORDER BY COUNT(b.actor_id) DESC
+LIMIT 1;
+
+SELECT a.return_date
+FROM rental a
+JOIN inventory b ON a.inventory_id=b.inventory_id 
+JOIN film c ON b.film_id=c.film_id
+WHERE c.title = "ACADEMY DINOSAUR";
+
+
+SELECT AVG(length) FROM film;
+
+SELECT * FROM film_text WHERE description LIKE "%Robot%";
+
+SELECT COUNT(title) FROM movies WHERE title LIKE "%2010%";
+
+SELECT a.title 
+FROM film a
+JOIN film_category b ON a.film_id=b.film_id
+JOIN category c ON b.category_id=c.category_id
+WHERE c.name = "Horror";
+
+
+SELECT first_name, last_name FROM staff WHERE staff_id = 2;
+
+SELECT film_info FROM actor_info WHERE last_name = "COSTNER";
+
+SELECT COUNT(DISTINCT country) FROM country;
+
+SELECT name FROM language ORDER BY name DESC;
+
+SELECT first_name, last_name FROM actor WHERE last_name LIKE "%son" ORDER BY first_name ASC;
+
+SELECT a.name, COUNT(b.category_id)
+FROM category a
+JOIN film_category b ON a.category_id=b.category_id
+GROUP BY b.category_id
+ORDER BY COUNT(b.category_id) DESC
+LIMIT 1;
